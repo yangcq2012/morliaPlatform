@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+ <mapper namespace="com.morlia.dao.FindUserDao">
+ 	<select id="findUser" resultType="com.morlia.entity.UserInfo">
+ 		select uid,username,password,email,oid,device,os,guest,facebook,google,created,
+ 				modified,accessed,email2 
+ 		from plat2_uid.user_index 
+ 		where 
+ 			<trim suffixOverrides="and">
+ 				<if test="user.username!=null">
+ 					username=#{user.username} and
+ 				</if>
+ 				<if test="user.email!=null">
+ 					email=#{user.email} and
+ 				</if>
+ 				<if test="user.uid!=null">
+ 					uid=#{user.uid} and
+ 				</if>
+ 				<if test="user.guest!=null">
+ 					guest=#{user.guest} and
+ 				</if>
+ 				<if test="user.facebook!=null">
+ 					facebook=#{user.facebook} and
+ 				</if>
+ 				<if test="user.device!=null">
+ 					device=#{user.device} and
+ 				</if>
+ 				<if test="user.os!=null">
+ 					os=#{user.os} and
+ 				</if>
+ 				<if test="user.google!=null">
+ 					google=#{user.google} and
+ 				</if>
+ 			</trim>	
+ 			order by uid desc		
+ 	</select>
+ 	<update id="updateAccessed">
+ 		update plat2_uid.user_index set accessed=now() where uid=#{uid}
+ 	</update>
+ 	<insert id="saveUserInfo" parameterType="com.morlia.entity.UserInfo">
+ 		insert into plat2_uid.user_index values(null,#{user.username},#{user.password}
+ 				,#{user.email},#{user.oid},#{user.device},#{user.os},#{user.guest},#{user.facebook}
+ 				,#{user.google},now(),now(),now(),#{user.email2})
+ 	</insert>
+ 	<update id="changePwd">
+ 		update plat2_uid.user_index 
+ 		set password=#{password},modified=now(),accessed=now(),email=#{userAddr}
+ 	    where uid=#{uid}
+ 	</update>
+ </mapper>

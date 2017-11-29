@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		<form action="regist.do" method="post">
+			<p>
+				注册用户
+				<span>
+					<a href="index.html">用户登录</a>
+				</span>
+			</p>
+			<p>
+				账号：<input type="text" name="account" id="account">
+			</p>
+			<p>
+				密码：<input type="password" name="password" id="password">
+			</p>
+			<p>
+				确认：<input type="password" name="password2" id="password2">
+			</p>
+			<p>
+				验证码：<input type="text" name="code" id="code"><span id="img"></span>
+				<a href="img.do?nocache=1">看不清楚，换一张</a>
+			</p>			
+		</form>
+	</div>
+	<div>
+		<p>
+			<input type="submit" value="同意条款并注册">&nbsp;&nbsp;
+			<input type="button" value="用户服务条款">
+		</p>
+	</div>
+</body>
+</html>
